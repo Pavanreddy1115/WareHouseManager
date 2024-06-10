@@ -20,7 +20,7 @@ public interface AdminService {
 
 	public ResponseEntity<ResponseStructure<AdminResponse>> addAdmin(AdminRequest adminRequest);
 
-	public ResponseEntity<ResponseStructure<AdminResponse>> createAdmin();
+	public ResponseEntity<ResponseStructure<AdminResponse>> createAdmin(AdminRequest adminRequest, int wareHouseId);
 
 
 }

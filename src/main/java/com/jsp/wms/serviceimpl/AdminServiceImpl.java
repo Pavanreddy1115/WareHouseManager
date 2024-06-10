@@ -11,11 +11,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.jsp.wms.entity.Admin;
+import com.jsp.wms.entity.WareHouse;
 import com.jsp.wms.enums.AdminType;
 import com.jsp.wms.enums.Privilege;
 import com.jsp.wms.exception.IllegalOperationException;
 import com.jsp.wms.mapper.AdminMapper;
 import com.jsp.wms.repository.AdminRepo;
+import com.jsp.wms.repository.WareHouseRepo;
 import com.jsp.wms.requestdto.AdminRequest;
 import com.jsp.wms.responsedto.AdminResponse;
 import com.jsp.wms.service.AdminService;
@@ -27,6 +29,9 @@ public class AdminServiceImpl implements AdminService{
 	private AdminRepo adminRepository;
 	@Autowired
 	private AdminMapper adminMapper;
+	@Autowired
+	private WareHouseRepo wareHouseRepo;
+	private Admin admin;
 
 
 
@@ -44,6 +49,26 @@ public class AdminServiceImpl implements AdminService{
 
 	
 	}
+
+	@Override
+	public ResponseEntity<ResponseStructure<AdminResponse>> createAdmin(AdminRequest adminRequest, int wareHouseId) {
+		
+		 return wareHouseRepo.findById(wareHouseId).map(warehouse -> {
+		        Admin admin = adminMapper.mapToAdmin(adminRequest, new Admin());
+		        admin.setAdminType(AdminType.ADMIN);
+		        adminRepository.save(admin);
+		        warehouse.setAdmin(admin);
+		        wareHouseRepo.save(warehouse);
+
+		        return ResponseEntity
+		                .status(HttpStatus.CREATED)
+		                .body(new ResponseStructure<AdminResponse>()
+		                        .setStatuscode(HttpStatus.CREATED.value())
+		                        .setMessage("Admin saved successfully")
+		                        .setData(adminMapper.mapToAdminResponse(admin)));
+		    }).orElseThrow(() -> new RuntimeException("Warehouse not found"));
+	    }
+		
 
 
 
