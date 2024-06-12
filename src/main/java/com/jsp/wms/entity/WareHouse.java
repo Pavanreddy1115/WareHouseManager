@@ -25,4 +25,6 @@ private String wareHouseName;
 @OneToOne
 private Admin admin;
 
+private int totalCapacity;
+
 }
