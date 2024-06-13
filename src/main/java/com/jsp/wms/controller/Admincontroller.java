@@ -32,7 +32,7 @@ public class Admincontroller {
 		return adminService.addAdmin(adminRequest);
 	}
 	
-	@PostMapping("/warehouses/{warehouseId}/admins")
+	@PostMapping("/warehouses/{wareHouseId}/admins")
 	public ResponseEntity<ResponseStructure<AdminResponse>> createAdmin(@RequestBody  AdminRequest adminRequest,@PathVariable int wareHouseId){
 		return adminService.createAdmin(adminRequest,wareHouseId);
 		
