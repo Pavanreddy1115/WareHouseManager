@@ -25,6 +25,9 @@ private String wareHouseName;
 @OneToOne
 private Admin admin;
 
+//@OneToOne
+//private Address address;
+
 private int totalCapacity;
 
 }

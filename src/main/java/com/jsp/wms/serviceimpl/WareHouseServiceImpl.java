@@ -10,6 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Service;
 
 import com.jsp.wms.entity.WareHouse;
 import com.jsp.wms.enums.AdminType;
@@ -22,11 +23,12 @@ import com.jsp.wms.responsedto.WareHouseResponse;
 import com.jsp.wms.service.WareHouseService;
 import com.jsp.wms.util.ResponseStructure;
 
+@Service
 public class WareHouseServiceImpl implements WareHouseService {
-	@Autowired
-	private SecurityContextHolder securityContextHolder;
+	
 	@Autowired
 	private WareHouseMapper wareHouseMapper;
+	
 	@Autowired
 	private WareHouseRepo wareHouseRepo;
 

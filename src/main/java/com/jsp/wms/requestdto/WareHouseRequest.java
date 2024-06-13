@@ -4,19 +4,16 @@ import com.jsp.wms.entity.Admin;
 
 import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.Pattern;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Setter
 @Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class WareHouseRequest {
-	
-	
-	@Pattern(regexp = "^[A-Za-z ]+$", message = "Name should only contain alphabetic characters")
 	private String wareHouseName;
 	private int totalCapacity;
-	
-	private Admin admin;
-	
-
 }

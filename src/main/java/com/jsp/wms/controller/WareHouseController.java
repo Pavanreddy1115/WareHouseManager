@@ -1,5 +1,6 @@
 package com.jsp.wms.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -19,15 +20,15 @@ import com.jsp.wms.util.ResponseStructure;
 @RestController
 @RequestMapping("/api/v1")
 public class WareHouseController {
-	
+	@Autowired
 	private WareHouseService wareHouseService;
 	
 	@PreAuthorize("hasAuthority('CREATE_WAREHOUSE')")
 	@PostMapping("/warehouses")
 	public ResponseEntity<ResponseStructure<WareHouseResponse>> createWareHouse(@RequestBody WareHouseRequest wareHouseRequest ) {
-		return wareHouseService.createWareHouse(wareHouseRequest);
-		
+		return wareHouseService.createWareHouse(wareHouseRequest);	
 	}
+	
 	@PreAuthorize("hasAuthority('CREATE_WAREHOUSE')")
 	@PutMapping("/warehouses/{wareHouseId}")
 	public ResponseEntity<ResponseStructure<WareHouseResponse>> updateWareHouse(@RequestBody WareHouseRequest wareHouseRequest,@PathVariable int  wareHouseId){
